@@ -1,12 +1,12 @@
-﻿using System.Data.Entity;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-using MVCHoldem.Data;
-using MVCHoldem.Data.Migrations;
-
-namespace MVCHoldem.Web
+﻿namespace MVCHoldem.Web
 {
+    using System.Data.Entity;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+    using MVCHoldem.Data;
+    using MVCHoldem.Data.Migrations;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()

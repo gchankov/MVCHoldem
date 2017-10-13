@@ -1,13 +1,13 @@
-﻿using System.Linq;
-
-namespace MVCHoldem.Data.Contracts
+﻿namespace MVCHoldem.Data.Contracts
 {
+    using System.Linq;
+
     public interface IEfRepository<T>
         where T : class
     {
         IQueryable<T> All { get; }
 
-        IQueryable<T> AllAndDeleted { get; }
+        IQueryable<T> AllIncludingDeleted { get; }
 
         void Add(T entity);
 

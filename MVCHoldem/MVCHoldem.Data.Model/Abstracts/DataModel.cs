@@ -1,10 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using MVCHoldem.Data.Model.Contracts;
-
-namespace MVCHoldem.Data.Model.Abstracts
+﻿namespace MVCHoldem.Data.Models.Abstracts
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using MVCHoldem.Data.Models.Contracts;
+
     public abstract class DataModel : IDeletable, IAuditable
     {
         public DataModel()

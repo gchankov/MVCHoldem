@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace MVCHoldem.Data.Model.Contracts
+﻿namespace MVCHoldem.Data.Models.Contracts
 {
+    using System;
+
     public interface IDeletable
     {
         bool IsDeleted { get; set; }

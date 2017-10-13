@@ -1,12 +1,12 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-using Microsoft.AspNet.Identity.EntityFramework;
-using MVCHoldem.Data.Model;
-using MVCHoldem.Data.Model.Contracts;
-
-namespace MVCHoldem.Data
+﻿namespace MVCHoldem.Data
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using MVCHoldem.Data.Models;
+    using MVCHoldem.Data.Models.Contracts;
+
     public class MsSqlDbContext : IdentityDbContext<User>
     {
         public MsSqlDbContext()

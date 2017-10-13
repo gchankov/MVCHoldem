@@ -5,7 +5,7 @@ namespace MVCHoldem.Data.Migrations
     using System.Linq;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using MVCHoldem.Data.Model;
+    using MVCHoldem.Data.Models;
 
     public sealed class Configuration : DbMigrationsConfiguration<MsSqlDbContext>
     {

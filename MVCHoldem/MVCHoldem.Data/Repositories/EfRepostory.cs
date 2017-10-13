@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using MVCHoldem.Data.Contracts;
-using MVCHoldem.Data.Model.Contracts;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity;
-
-namespace MVCHoldem.Data.Repositories
+﻿namespace MVCHoldem.Data.Repositories
 {
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using MVCHoldem.Data.Contracts;
+    using MVCHoldem.Data.Models.Contracts;
+
     public class EfRepository<T> : IEfRepository<T>
         where T : class, IDeletable
     {
@@ -25,7 +25,7 @@ namespace MVCHoldem.Data.Repositories
             }
         }
 
-        public IQueryable<T> AllAndDeleted
+        public IQueryable<T> AllIncludingDeleted
         {
             get
             {
