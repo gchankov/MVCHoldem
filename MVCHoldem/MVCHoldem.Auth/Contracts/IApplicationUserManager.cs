@@ -5,7 +5,7 @@
     using Microsoft.AspNet.Identity;
     using MVCHoldem.Data.Models;
 
-    public interface IUserService : IDisposable
+    public interface IApplicationUserManager : IDisposable
     {
         Task<IdentityResult> CreateAsync(User user, string password);
 

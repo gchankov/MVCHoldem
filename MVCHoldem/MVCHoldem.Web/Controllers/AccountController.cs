@@ -1,30 +1,23 @@
 ﻿namespace MVCHoldem.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
-    using MVCHoldem.Auth.Contracts;
-    using MVCHoldem.Data.Models;
+    using MVCHoldem.Services.Contracts;
     using MVCHoldem.Web.ViewModels;
 
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly ISignInService signInService;
+        private readonly IAuthService authService;
         private readonly IUserService userService;
 
-        public AccountController()
+        public AccountController(IAuthService authService, IUserService userService)
         {
-        }
-
-        public AccountController(IUserService userService, ISignInService signInService)
-        {
+            this.authService = authService;
             this.userService = userService;
-            this.signInService = signInService;
         }
 
         private IAuthenticationManager AuthenticationManager
@@ -46,14 +39,14 @@
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
                 return this.View(model);
             }
 
-            var result = await this.signInService.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = this.authService.Login(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -77,18 +70,11 @@
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new User
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    CreatedOn = DateTime.Now
-                };
-
-                var result = await this.userService.CreateAsync(user, model.Password);
+                var result = this.userService.Create(model.Email, model.Password);
                 if (result.Succeeded)
                 {
                     return this.RedirectToAction("Login");
@@ -117,9 +103,9 @@
                     this.userService.Dispose();
                 }
 
-                if (this.signInService != null)
+                if (this.authService != null)
                 {
-                    this.signInService.Dispose();
+                    this.authService.Dispose();
                 }
             }
 

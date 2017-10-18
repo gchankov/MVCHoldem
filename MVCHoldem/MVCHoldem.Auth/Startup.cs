@@ -7,7 +7,7 @@ namespace MVCHoldem.Auth
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
-    using MVCHoldem.Auth.Services;
+    using MVCHoldem.Auth.Managers;
     using MVCHoldem.Data;
     using MVCHoldem.Data.Models;
     using Owin;
@@ -22,8 +22,8 @@ namespace MVCHoldem.Auth
         public void ConfigureAuth(IAppBuilder app)
         {
             app.CreatePerOwinContext(MsSqlDbContext.Create);
-            app.CreatePerOwinContext<UserService>(UserService.Create);
-            app.CreatePerOwinContext<SignInService>(SignInService.Create);
+            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
@@ -31,7 +31,7 @@ namespace MVCHoldem.Auth
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<UserService, User>(
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, User>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }

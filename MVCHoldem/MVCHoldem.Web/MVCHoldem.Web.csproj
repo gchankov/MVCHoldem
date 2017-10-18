@@ -304,6 +304,10 @@
       <Project>{8eccd27b-74da-4c14-b2bd-0c73a60293e3}</Project>
       <Name>MVCHoldem.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MVCHoldem.Services\MVCHoldem.Services.csproj">
+      <Project>{A3116608-022B-453C-BB25-347C33968BE7}</Project>
+      <Name>MVCHoldem.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

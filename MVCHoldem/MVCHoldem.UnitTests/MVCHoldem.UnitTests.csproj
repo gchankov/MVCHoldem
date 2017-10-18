@@ -43,10 +43,10 @@
       <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -136,13 +136,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\AuthServiceTests\Login_Should.cs" />
+    <Compile Include="Services\UserServiceTests\ChangePassword_Should.cs" />
+    <Compile Include="Services\UserServiceTests\Create_Should.cs" />
+    <Compile Include="Services\UserServiceTests\FindById_Should.cs" />
     <Compile Include="Web\Controllers\AboutControllerTests\Index_Should.cs" />
     <Compile Include="Web\Controllers\AccountControllerTests\Login_Should.cs" />
     <Compile Include="Web\Controllers\AccountControllerTests\Register_Should.cs" />
     <Compile Include="Web\Controllers\ContactControllerTests\Index_Should.cs" />
     <Compile Include="Web\Controllers\HomeControllerTests\Index_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\Controllers\ManageControllerTests\Index_Should.cs" />
+    <Compile Include="Web\Controllers\ManageControllerTests\ChangePassword_Should.cs" />
     <Compile Include="Wrappers\IdentityResultWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +161,10 @@
     <ProjectReference Include="..\MVCHoldem.Data.Model\MVCHoldem.Data.Models.csproj">
       <Project>{D3E133A9-A488-40B5-A950-6695E888D80D}</Project>
       <Name>MVCHoldem.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MVCHoldem.Services\MVCHoldem.Services.csproj">
+      <Project>{A3116608-022B-453C-BB25-347C33968BE7}</Project>
+      <Name>MVCHoldem.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\MVCHoldem.Web\MVCHoldem.Web.csproj">
       <Project>{17fc4bf8-25ee-43d3-846a-e3f7ff7074b8}</Project>

@@ -1,4 +1,4 @@
-﻿namespace MVCHoldem.Auth.Services
+﻿namespace MVCHoldem.Auth.Managers
 {
     using System;
     using Microsoft.AspNet.Identity;
@@ -9,16 +9,16 @@
     using MVCHoldem.Data;
     using MVCHoldem.Data.Models;
 
-    public class UserService : UserManager<User>, IUserService
+    public class ApplicationUserManager : UserManager<User>, IApplicationUserManager
     {
-        public UserService(IUserStore<User> store)
+        public ApplicationUserManager(IUserStore<User> store)
             : base(store)
         {
         }
 
-        public static UserService Create(IdentityFactoryOptions<UserService> options, IOwinContext context)
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new UserService(new UserStore<User>(context.Get<MsSqlDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<MsSqlDbContext>()));
 
             manager.UserValidator = new UserValidator<User>(manager)
             {

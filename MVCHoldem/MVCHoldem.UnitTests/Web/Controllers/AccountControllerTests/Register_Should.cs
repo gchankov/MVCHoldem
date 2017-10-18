@@ -1,13 +1,11 @@
 ﻿namespace MVCHoldem.UnitTests.Web.Controllers.AccountControllerTests
 {
     using Moq;
-    using MVCHoldem.Auth.Contracts;
-    using MVCHoldem.Data.Models;
+    using MVCHoldem.Services.Contracts;
     using MVCHoldem.UnitTests.Wrappers;
     using MVCHoldem.Web.Controllers;
     using MVCHoldem.Web.ViewModels;
     using NUnit.Framework;
-    using System.Threading.Tasks;
     using TestStack.FluentMVCTesting;
 
     [TestFixture]
@@ -17,9 +15,9 @@
         public void RenderRegisterView_WhenCalledWithAboutViewModel()
         {
             // Arrange
-            var signInServiceMock = new Mock<ISignInService>();
+            var authServiceMock = new Mock<IAuthService>();
             var userServiceMock = new Mock<IUserService>();
-            AccountController accountController = new AccountController(userServiceMock.Object, signInServiceMock.Object);
+            AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 
             // Act & Assert
             accountController
@@ -33,12 +31,12 @@
             // Arrange
             var registerViewModel = new RegisterViewModel();
             var identityResultWrapper = new IdentityResultWrapper(true);
-            var signInServiceMock = new Mock<ISignInService>();
+            var authServiceMock = new Mock<IAuthService>();
             var userServiceMock = new Mock<IUserService>();
             userServiceMock
-                .Setup(s => s.CreateAsync(It.IsAny<User>(), It.IsAny<string>()))
-                .Returns(Task.FromResult(identityResultWrapper.GetIdentityResult()));
-            AccountController accountController = new AccountController(userServiceMock.Object, signInServiceMock.Object);
+                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(identityResultWrapper.GetIdentityResult());
+            AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 
             // Act & Assert
             accountController
@@ -52,12 +50,12 @@
             // Arrange
             var registerViewModel = new RegisterViewModel();
             var identityResultWrapper = new IdentityResultWrapper(new string[] { "Error message." });
-            var signInServiceMock = new Mock<ISignInService>();
+            var authServiceMock = new Mock<IAuthService>();
             var userServiceMock = new Mock<IUserService>();
             userServiceMock
-                .Setup(s => s.CreateAsync(It.IsAny<User>(), It.IsAny<string>()))
-                .Returns(Task.FromResult(identityResultWrapper.GetIdentityResult()));
-            AccountController accountController = new AccountController(userServiceMock.Object, signInServiceMock.Object);
+                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(identityResultWrapper.GetIdentityResult());
+            AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 
             // Act & Assert
             accountController

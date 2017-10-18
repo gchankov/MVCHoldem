@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Identity;
-using System.Collections.Generic;
-
-namespace MVCHoldem.UnitTests.Wrappers
+﻿namespace MVCHoldem.UnitTests.Wrappers
 {
+    using System.Collections.Generic;
+    using Microsoft.AspNet.Identity;
+
     public class IdentityResultWrapper : IdentityResult
     {
         public IdentityResultWrapper(bool success)

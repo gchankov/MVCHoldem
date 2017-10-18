@@ -25,6 +25,17 @@
             return base.SaveChanges();
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityUser>().ToTable("Users").Property(p => p.Id).HasColumnName("Id");
+            modelBuilder.Entity<User>().ToTable("Users").Property(p => p.Id).HasColumnName("Id");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+        }
+
         private void ApplyAuditInfoRules()
         {
             foreach (var entry in

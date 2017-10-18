@@ -5,7 +5,7 @@
     using Microsoft.AspNet.Identity.Owin;
     using MVCHoldem.Data.Models;
 
-    public interface ISignInService : IDisposable
+    public interface IApplicationSignInManager : IDisposable
     {
         Task<SignInStatus> PasswordSignInAsync(string userName, string password, bool isPersistent, bool shouldLockout);
 
