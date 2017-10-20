@@ -1,6 +1,10 @@
 ﻿namespace MVCHoldem.UnitTests.Controllers.HomeControllerTests
 {
+    using AutoMapper;
+    using Moq;
+    using MVCHoldem.Services.Contracts;
     using MVCHoldem.Web.Controllers;
+    using MVCHoldem.Web.ViewModels.Home;
     using NUnit.Framework;
     using TestStack.FluentMVCTesting;
 
@@ -8,15 +12,17 @@
     public class Index_Should
     {
         [Test]
-        public void RenderDefaultView_WhenCalled()
+        public void RenderDefaultViewWithHomeViewModel_WhenCalled()
         {
             // Arrange
-            HomeController homeController = new HomeController();
+            var postServiceMock = new Mock<IPostService>();
+            HomeController homeController = new HomeController(postServiceMock.Object);
 
             // Act & Assert
             homeController
                 .WithCallTo(c => c.Index())
-                .ShouldRenderDefaultView();
+                .ShouldRenderDefaultView()
+                .WithModel<HomeViewModel>();
         }
     }
 }

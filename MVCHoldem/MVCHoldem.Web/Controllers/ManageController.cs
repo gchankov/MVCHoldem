@@ -11,7 +11,7 @@
     {
         private readonly IUserService userService;
 
-        public ManageController(IAuthService authService, IUserService userService)
+        public ManageController(IUserService userService)
         {
             this.userService = userService;
         }
@@ -27,11 +27,9 @@
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : string.Empty;
-
-            var userId = User.Identity.GetUserId();
+            
             var model = new ManageViewModel
             {
-                HasPassword = this.HasPassword(),
                 StatusMessage = statusMessage
             };
             return this.View(model);
@@ -79,17 +77,6 @@
             {
                 ModelState.AddModelError(string.Empty, error);
             }
-        }
-
-        private bool HasPassword()
-        {
-            var user = this.userService.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-
-            return false;
         }
 #endregion
     }

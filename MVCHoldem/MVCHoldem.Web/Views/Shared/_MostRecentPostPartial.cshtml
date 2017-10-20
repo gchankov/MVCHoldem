@@ -1,0 +1,8 @@
+﻿@using MVCHoldem.Web.ViewModels.Home
+@model MostRecentPostViewModel
+
+<div class="row">
+    <h2>@Model.Title</h2>
+    <p>@Model.Description</p>
+    <p>@Html.DisplayFor(x => Model.PostedOn) - @Model.AuthorEmail</p>
+</div>

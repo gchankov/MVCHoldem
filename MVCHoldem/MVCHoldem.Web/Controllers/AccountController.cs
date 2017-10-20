@@ -11,12 +11,12 @@
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly IAuthService authService;
+        private readonly ISignInService signInService;
         private readonly IUserService userService;
 
-        public AccountController(IAuthService authService, IUserService userService)
+        public AccountController(ISignInService signInService, IUserService userService)
         {
-            this.authService = authService;
+            this.signInService = signInService;
             this.userService = userService;
         }
 
@@ -46,7 +46,7 @@
                 return this.View(model);
             }
 
-            var result = this.authService.Login(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = this.signInService.Login(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -103,9 +103,9 @@
                     this.userService.Dispose();
                 }
 
-                if (this.authService != null)
+                if (this.signInService != null)
                 {
-                    this.authService.Dispose();
+                    this.signInService.Dispose();
                 }
             }
 

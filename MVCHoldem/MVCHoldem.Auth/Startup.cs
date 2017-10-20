@@ -21,7 +21,7 @@ namespace MVCHoldem.Auth
 
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.CreatePerOwinContext(MsSqlDbContext.Create);
+            app.CreatePerOwinContext(EfDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 

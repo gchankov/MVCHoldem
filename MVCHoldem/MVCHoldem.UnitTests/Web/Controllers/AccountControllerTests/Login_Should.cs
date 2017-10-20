@@ -1,12 +1,12 @@
 ﻿namespace MVCHoldem.UnitTests.Web.Controllers.AccountControllerTests
 {
+    using System.Web.Mvc;
     using Microsoft.AspNet.Identity.Owin;
     using Moq;
     using MVCHoldem.Services.Contracts;
     using MVCHoldem.Web.Controllers;
     using MVCHoldem.Web.ViewModels;
     using NUnit.Framework;
-    using System.Web.Mvc;
     using TestStack.FluentMVCTesting;
 
     [TestFixture]
@@ -17,7 +17,7 @@
         {
             // Arrange
             string returnUrl = "returnUrl";
-            var authServiceMock = new Mock<IAuthService>();
+            var authServiceMock = new Mock<ISignInService>();
             var userServiceMock = new Mock<IUserService>();
             AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 
@@ -33,7 +33,7 @@
         {
             // Arrange
             string returnUrl = "returnUrl";
-            var authServiceMock = new Mock<IAuthService>();
+            var authServiceMock = new Mock<ISignInService>();
             authServiceMock
                 .Setup(s => s.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(SignInStatus.Success);
@@ -55,7 +55,7 @@
         {
             // Arrange
             string returnUrl = "returnUrl";
-            var authServiceMock = new Mock<IAuthService>();
+            var authServiceMock = new Mock<ISignInService>();
             authServiceMock
                 .Setup(s => s.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(SignInStatus.LockedOut);
@@ -74,7 +74,7 @@
         {
             // Arrange
             string returnUrl = "returnUrl";
-            var authServiceMock = new Mock<IAuthService>();
+            var authServiceMock = new Mock<ISignInService>();
             authServiceMock
                 .Setup(s => s.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(SignInStatus.Failure);
