@@ -90,17 +90,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IEfRepositry.cs" />
+    <Compile Include="Contracts\IEfDbSetWrapper.cs" />
     <Compile Include="Migrations\201710180026006_Initial.cs" />
     <Compile Include="Migrations\201710180026006_Initial.Designer.cs">
       <DependentUpon>201710180026006_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710201631083_AddingPostModel.cs" />
+    <Compile Include="Migrations\201710201631083_AddingPostModel.Designer.cs">
+      <DependentUpon>201710201631083_AddingPostModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="MsSqlDbContext.cs" />
+    <Compile Include="EfDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\EfRepostory.cs" />
-    <Compile Include="UnitOfWork\EfUnitOfWork.cs" />
-    <Compile Include="Contracts\IEfUnitOfWork.cs" />
+    <Compile Include="SaveChanges\EfDbContextSaveChanges.cs" />
+    <Compile Include="SetWrappers\EfDbSetWrapper.cs" />
+    <Compile Include="Contracts\IEfDbContextSaveChanges.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -115,6 +119,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710180026006_Initial.resx">
       <DependentUpon>201710180026006_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710201631083_AddingPostModel.resx">
+      <DependentUpon>201710201631083_AddingPostModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -22,7 +22,7 @@
             UserService userService = new UserService(applicationUserManagerMock.Object);
 
             // Act
-            var result = userService.Create("email", "password");
+            var result = userService.Create("username", "email", "password");
 
             // Assert
             Assert.IsInstanceOf<IdentityResult>(result);

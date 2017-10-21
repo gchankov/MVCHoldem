@@ -1,6 +1,7 @@
 ﻿namespace MVCHoldem.Web.Controllers
 {
     using System.Web.Mvc;
+    using Bytes2you.Validation;
     using Microsoft.AspNet.Identity;
     using MVCHoldem.Services.Contracts;
     using MVCHoldem.Web.Enums;
@@ -11,8 +12,10 @@
     {
         private readonly IUserService userService;
 
-        public ManageController(IAuthService authService, IUserService userService)
+        public ManageController(IUserService userService)
         {
+            Guard.WhenArgument(userService, "userService").IsNull().Throw();
+
             this.userService = userService;
         }
 
@@ -27,11 +30,9 @@
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : string.Empty;
-
-            var userId = User.Identity.GetUserId();
+            
             var model = new ManageViewModel
             {
-                HasPassword = this.HasPassword(),
                 StatusMessage = statusMessage
             };
             return this.View(model);
@@ -79,17 +80,6 @@
             {
                 ModelState.AddModelError(string.Empty, error);
             }
-        }
-
-        private bool HasPassword()
-        {
-            var user = this.userService.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-
-            return false;
         }
 #endregion
     }

@@ -15,7 +15,7 @@
         public void RenderRegisterView_WhenCalledWithAboutViewModel()
         {
             // Arrange
-            var authServiceMock = new Mock<IAuthService>();
+            var authServiceMock = new Mock<ISignInService>();
             var userServiceMock = new Mock<IUserService>();
             AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 
@@ -31,10 +31,10 @@
             // Arrange
             var registerViewModel = new RegisterViewModel();
             var identityResultWrapper = new IdentityResultWrapper(true);
-            var authServiceMock = new Mock<IAuthService>();
+            var authServiceMock = new Mock<ISignInService>();
             var userServiceMock = new Mock<IUserService>();
             userServiceMock
-                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>()))
+                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(identityResultWrapper.GetIdentityResult());
             AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 
@@ -50,10 +50,10 @@
             // Arrange
             var registerViewModel = new RegisterViewModel();
             var identityResultWrapper = new IdentityResultWrapper(new string[] { "Error message." });
-            var authServiceMock = new Mock<IAuthService>();
+            var authServiceMock = new Mock<ISignInService>();
             var userServiceMock = new Mock<IUserService>();
             userServiceMock
-                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>()))
+                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(identityResultWrapper.GetIdentityResult());
             AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 

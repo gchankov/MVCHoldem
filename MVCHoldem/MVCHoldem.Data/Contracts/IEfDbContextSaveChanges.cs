@@ -1,6 +1,6 @@
 ﻿namespace MVCHoldem.Data.Contracts
 {
-    public interface IEfUnitOfWork
+    public interface IEfDbContextSaveChanges
     {
         void SaveChanges();
     }

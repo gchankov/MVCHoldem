@@ -1,6 +1,7 @@
 ﻿namespace MVCHoldem.Services
 {
     using System;
+    using Bytes2you.Validation;
     using Microsoft.AspNet.Identity;
     using MVCHoldem.Auth.Contracts;
     using MVCHoldem.Data.Models;
@@ -12,14 +13,16 @@
 
         public UserService(IApplicationUserManager applicationUserManager)
         {
+            Guard.WhenArgument(applicationUserManager, "applicationUserManager").IsNull().Throw();
+
             this.applicationUserManager = applicationUserManager;
         }
 
-        public IdentityResult Create(string email, string password)
+        public IdentityResult Create(string userName, string email, string password)
         {
             var user = new User
             {
-                UserName = email,
+                UserName = userName,
                 Email = email,
                 CreatedOn = DateTime.Now
             };

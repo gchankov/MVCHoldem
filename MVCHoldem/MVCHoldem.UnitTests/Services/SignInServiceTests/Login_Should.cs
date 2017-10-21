@@ -1,12 +1,12 @@
-﻿namespace MVCHoldem.UnitTests.Services.AuthServiceTests
+﻿namespace MVCHoldem.UnitTests.Services.SignInServiceTests
 {
+    using System.Threading.Tasks;
     using Microsoft.AspNet.Identity.Owin;
     using Moq;
     using MVCHoldem.Auth.Contracts;
     using MVCHoldem.Data.Models;
     using MVCHoldem.Services;
     using NUnit.Framework;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class Login_Should
@@ -19,7 +19,7 @@
             var applicationUserManagerMock = new Mock<IApplicationUserManager>();
             applicationSignInManagerMock.Setup(m => m.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .ReturnsAsync(SignInStatus.Success);
-            AuthService authService = new AuthService(applicationSignInManagerMock.Object, applicationUserManagerMock.Object);
+            SignInService authService = new SignInService(applicationSignInManagerMock.Object, applicationUserManagerMock.Object);
 
             // Act
             var result = authService.Login("username", "password", false, false);
@@ -39,7 +39,7 @@
                 .Returns(new User());
             applicationSignInManagerMock.Setup(m => m.SignInAsync(It.IsAny<User>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(Task.FromResult(default(object)));
-            AuthService authService = new AuthService(applicationSignInManagerMock.Object, applicationUserManagerMock.Object);
+            SignInService authService = new SignInService(applicationSignInManagerMock.Object, applicationUserManagerMock.Object);
 
             // Act
             authService.Login("user id", false, false);

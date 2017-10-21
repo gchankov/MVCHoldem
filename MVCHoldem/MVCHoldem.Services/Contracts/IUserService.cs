@@ -8,7 +8,7 @@
     {
         IdentityResult ChangePassword(string userId, string currentPassword, string newPassword);
 
-        IdentityResult Create(string email, string password);
+        IdentityResult Create(string userName, string email, string password);
 
         User FindById(string userId);
     }

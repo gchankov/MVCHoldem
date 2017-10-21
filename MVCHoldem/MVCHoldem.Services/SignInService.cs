@@ -1,16 +1,20 @@
 ﻿namespace MVCHoldem.Services
 {
+    using Bytes2you.Validation;
     using Microsoft.AspNet.Identity.Owin;
     using MVCHoldem.Auth.Contracts;
     using MVCHoldem.Services.Contracts;
 
-    public class AuthService : IAuthService
+    public class SignInService : ISignInService
     {
         private readonly IApplicationSignInManager applicationSignInManager;
         private readonly IApplicationUserManager applicationUserManager;
 
-        public AuthService(IApplicationSignInManager applicationSignInManager, IApplicationUserManager applicationUserManager)
+        public SignInService(IApplicationSignInManager applicationSignInManager, IApplicationUserManager applicationUserManager)
         {
+            Guard.WhenArgument(applicationSignInManager, "applicationSignInManager").IsNull().Throw();
+            Guard.WhenArgument(applicationUserManager, "applicationUserManager").IsNull().Throw();
+
             this.applicationSignInManager = applicationSignInManager;
             this.applicationUserManager = applicationUserManager;
         }

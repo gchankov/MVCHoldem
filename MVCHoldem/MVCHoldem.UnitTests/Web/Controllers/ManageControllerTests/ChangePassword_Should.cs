@@ -13,9 +13,8 @@
         public void RendervChangePasswordView_WhenCalled()
         {
             // Arrange
-            var authServiceMock = new Mock<IAuthService>();
             var userServiceMock = new Mock<IUserService>();
-            ManageController manageController = new ManageController(authServiceMock.Object, userServiceMock.Object);
+            ManageController manageController = new ManageController(userServiceMock.Object);
 
             // Act & Assert
             manageController

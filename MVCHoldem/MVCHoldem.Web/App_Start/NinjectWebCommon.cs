@@ -5,7 +5,6 @@ namespace MVCHoldem.Web.App_Start
 {
     using System;
     using System.Data.Entity;
-    using System.Reflection;
     using System.Web;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -13,8 +12,10 @@ namespace MVCHoldem.Web.App_Start
     using MVCHoldem.Auth.Managers;
     using MVCHoldem.Data;
     using MVCHoldem.Data.Contracts;
-    using MVCHoldem.Data.Repositories;
+    using MVCHoldem.Data.SaveChanges;
+    using MVCHoldem.Data.SetWrappers;
     using MVCHoldem.Services;
+    using MVCHoldem.Services.Contracts;
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
@@ -65,14 +66,14 @@ namespace MVCHoldem.Web.App_Start
 
             kernel.Bind(x =>
             {
-                x.From(Assembly.GetAssembly(userServiceAssemblyType).FullName)
+                x.FromAssemblyContaining(typeof(IUserService))
                  .SelectAllClasses()
                  .BindDefaultInterface();
             });
 
-            kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
-            kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
-
+            kernel.Bind(typeof(DbContext), typeof(EfDbContext)).To<EfDbContext>().InRequestScope();
+            kernel.Bind(typeof(IEfDbSetWrapper<>)).To(typeof(EfDbSetWrapper<>));
+            kernel.Bind(typeof(IEfDbContextSaveChanges)).To(typeof(EfDbContextSaveChanges));
             kernel.Bind<IApplicationSignInManager>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
             kernel.Bind<IApplicationUserManager>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
         }        
