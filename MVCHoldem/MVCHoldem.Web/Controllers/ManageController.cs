@@ -1,6 +1,7 @@
 ﻿namespace MVCHoldem.Web.Controllers
 {
     using System.Web.Mvc;
+    using Bytes2you.Validation;
     using Microsoft.AspNet.Identity;
     using MVCHoldem.Services.Contracts;
     using MVCHoldem.Web.Enums;
@@ -13,6 +14,8 @@
 
         public ManageController(IUserService userService)
         {
+            Guard.WhenArgument(userService, "userService").IsNull().Throw();
+
             this.userService = userService;
         }
 

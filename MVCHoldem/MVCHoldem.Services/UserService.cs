@@ -18,11 +18,11 @@
             this.applicationUserManager = applicationUserManager;
         }
 
-        public IdentityResult Create(string email, string password)
+        public IdentityResult Create(string userName, string email, string password)
         {
             var user = new User
             {
-                UserName = email,
+                UserName = userName,
                 Email = email,
                 CreatedOn = DateTime.Now
             };

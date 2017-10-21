@@ -6,7 +6,6 @@ namespace MVCHoldem.Web.App_Start
     using System;
     using System.Data.Entity;
     using System.Web;
-    using AutoMapper;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using MVCHoldem.Auth.Contracts;

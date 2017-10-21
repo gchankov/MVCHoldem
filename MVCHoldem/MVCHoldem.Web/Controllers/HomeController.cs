@@ -10,19 +10,19 @@
 
     public class HomeController : Controller
     {
-        private readonly IPostService postsService;
+        private readonly IPostService postService;
 
-        public HomeController(IPostService postsService)
+        public HomeController(IPostService postService)
         {
-            Guard.WhenArgument(postsService, "postsService").IsNull().Throw();
+            Guard.WhenArgument(postService, "postsService").IsNull().Throw();
 
-            this.postsService = postsService;
+            this.postService = postService;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var mostRecentPosts = this.postsService
+            var mostRecentPosts = this.postService
                 .GetMostRecent()
                 .Map<Post, MostRecentPostViewModel>()
                 .ToList();

@@ -1,5 +1,6 @@
 ﻿namespace MVCHoldem.Data.Contracts
 {
+    using System;
     using System.Linq;
 
     public interface IEfDbSetWrapper<T>
@@ -8,6 +9,8 @@
         IQueryable<T> AllWithoutDeleted { get; }
 
         IQueryable<T> AllIncludingDeleted { get; }
+
+        T GetById(Guid id);
 
         void Add(T entity);
 

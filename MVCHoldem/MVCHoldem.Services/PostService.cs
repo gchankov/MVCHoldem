@@ -1,5 +1,6 @@
 ﻿namespace MVCHoldem.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Bytes2you.Validation;
@@ -25,10 +26,17 @@
 
         public IEnumerable<Post> GetMostRecent()
         {
-            return this.postsDbSet.AllWithoutDeleted
+            return this.postsDbSet
+                .AllWithoutDeleted
                 .OrderByDescending(p => p.CreatedOn)
                 .Take(MostRecentCount)
                 .AsEnumerable();
+        }
+
+        public Post GetById(Guid id)
+        {
+            return this.postsDbSet
+                .GetById(id);
         }
     }
 }

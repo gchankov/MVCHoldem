@@ -10,7 +10,7 @@
     public class EfDbContext : IdentityDbContext<User>
     {
         public EfDbContext()
-            : base("LocalConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 

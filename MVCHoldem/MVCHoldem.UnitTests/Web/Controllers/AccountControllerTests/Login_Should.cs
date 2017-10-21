@@ -17,9 +17,9 @@
         {
             // Arrange
             string returnUrl = "returnUrl";
-            var authServiceMock = new Mock<ISignInService>();
+            var signInServiceMock = new Mock<ISignInService>();
             var userServiceMock = new Mock<IUserService>();
-            AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
+            AccountController accountController = new AccountController(signInServiceMock.Object, userServiceMock.Object);
 
             // Act & Assert
             accountController
@@ -33,15 +33,15 @@
         {
             // Arrange
             string returnUrl = "returnUrl";
-            var authServiceMock = new Mock<ISignInService>();
-            authServiceMock
+            var signInServiceMock = new Mock<ISignInService>();
+            signInServiceMock
                 .Setup(s => s.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(SignInStatus.Success);
             var userServiceMock = new Mock<IUserService>();
             var urlHelperMock = new Mock<UrlHelper>();
             urlHelperMock.Setup(uhm => uhm.IsLocalUrl(returnUrl)).Returns(true);
             var loginViewModel = new LoginViewModel();
-            AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
+            AccountController accountController = new AccountController(signInServiceMock.Object, userServiceMock.Object);
             accountController.Url = urlHelperMock.Object;
 
             // Act & Assert
@@ -55,13 +55,13 @@
         {
             // Arrange
             string returnUrl = "returnUrl";
-            var authServiceMock = new Mock<ISignInService>();
-            authServiceMock
+            var signInServiceMock = new Mock<ISignInService>();
+            signInServiceMock
                 .Setup(s => s.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(SignInStatus.LockedOut);
             var userServiceMock = new Mock<IUserService>();
             var loginViewModel = new LoginViewModel();
-            AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
+            AccountController accountController = new AccountController(signInServiceMock.Object, userServiceMock.Object);
 
             // Act & Assert
             accountController
@@ -74,13 +74,13 @@
         {
             // Arrange
             string returnUrl = "returnUrl";
-            var authServiceMock = new Mock<ISignInService>();
-            authServiceMock
+            var signInServiceMock = new Mock<ISignInService>();
+            signInServiceMock
                 .Setup(s => s.Login(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()))
                 .Returns(SignInStatus.Failure);
             var userServiceMock = new Mock<IUserService>();
             var loginViewModel = new LoginViewModel();
-            AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
+            AccountController accountController = new AccountController(signInServiceMock.Object, userServiceMock.Object);
 
             // Act & Assert
             accountController

@@ -2,6 +2,7 @@
 {
     using System.Web;
     using System.Web.Mvc;
+    using Bytes2you.Validation;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
@@ -16,6 +17,9 @@
 
         public AccountController(ISignInService signInService, IUserService userService)
         {
+            Guard.WhenArgument(signInService, "signInService").IsNull().Throw();
+            Guard.WhenArgument(userService, "userService").IsNull().Throw();
+
             this.signInService = signInService;
             this.userService = userService;
         }
@@ -46,7 +50,7 @@
                 return this.View(model);
             }
 
-            var result = this.signInService.Login(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = this.signInService.Login(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -74,7 +78,7 @@
         {
             if (ModelState.IsValid)
             {
-                var result = this.userService.Create(model.Email, model.Password);
+                var result = this.userService.Create(model.UserName, model.Email, model.Password);
                 if (result.Succeeded)
                 {
                     return this.RedirectToAction("Login");

@@ -1,6 +1,7 @@
 ﻿namespace MVCHoldem.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
@@ -11,6 +12,11 @@
 
     public class User : IdentityUser, IDeletable, IAuditable
     {
+        public User() : base()
+        {
+            this.Posts = new HashSet<Post>();
+        }
+
         [DataType(DataType.DateTime)]
         public DateTime CreatedOn { get; set; }
 
@@ -23,7 +29,7 @@
         [DataType(DataType.DateTime)]
         public DateTime? DeletedOn { get; set; }
 
-        public virtual IEquatable<Post> Posts { get; set; }
+        public virtual IEnumerable<Post> Posts { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

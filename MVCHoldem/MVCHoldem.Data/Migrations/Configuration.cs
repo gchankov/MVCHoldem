@@ -9,7 +9,8 @@ namespace MVCHoldem.Data.Migrations
 
     public sealed class Configuration : DbMigrationsConfiguration<EfDbContext>
     {
-        private const string AdministratorUserName = "admin@admin.com";
+        private const string AdministratorUserName = "admin";
+        private const string AdministratorEmail = "admin@admin.com";
         private const string AdministratorPassword = "123qwe";
 
         public Configuration()
@@ -39,7 +40,7 @@ namespace MVCHoldem.Data.Migrations
                 var user = new User
                 {
                     UserName = AdministratorUserName,
-                    Email = AdministratorUserName,
+                    Email = AdministratorEmail,
                     EmailConfirmed = true,
                     CreatedOn = DateTime.Now
                 };
@@ -60,7 +61,7 @@ namespace MVCHoldem.Data.Migrations
                         Title = "Post " + i,
                         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet...",
                         Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lobortis nibh. Nullam bibendum, tortor quis porttitor fringilla, eros risus consequat orci, at scelerisque mauris dolor sit amet nulla. Vivamus turpis lorem, pellentesque eget enim ut, semper faucibus tortor. Aenean malesuada laoreet lorem.",
-                        Author = context.Users.First(x => x.Email == AdministratorUserName),
+                        Author = context.Users.First(x => x.UserName == AdministratorUserName),
                         CreatedOn = DateTime.Now
                     };
 

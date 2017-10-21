@@ -1,0 +1,18 @@
+﻿@using MVCHoldem.Web.ViewModels
+@model PostDetailsViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <h2>@Model.Title</h2>
+</div>
+<div class="row">
+    <p>@Model.Description</p>
+</div>
+<div class="row">
+    <p>@Model.Content</p>
+</div>
+<div class="row">
+    <p>Posted on: @Html.DisplayFor(x => Model.PostedOn) by @Model.Author</p>
+</div>

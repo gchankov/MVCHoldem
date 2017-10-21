@@ -34,7 +34,7 @@
             var authServiceMock = new Mock<ISignInService>();
             var userServiceMock = new Mock<IUserService>();
             userServiceMock
-                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>()))
+                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(identityResultWrapper.GetIdentityResult());
             AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 
@@ -53,7 +53,7 @@
             var authServiceMock = new Mock<ISignInService>();
             var userServiceMock = new Mock<IUserService>();
             userServiceMock
-                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>()))
+                .Setup(s => s.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(identityResultWrapper.GetIdentityResult());
             AccountController accountController = new AccountController(authServiceMock.Object, userServiceMock.Object);
 
