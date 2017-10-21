@@ -6,7 +6,7 @@
     using MVCHoldem.Services;
     using MVCHoldem.Services.Contracts;
     using MVCHoldem.Web.Controllers;
-    using MVCHoldem.Web.ViewModels;
+    using MVCHoldem.Web.ViewModels.Post;
     using NUnit.Framework;
     using TestStack.FluentMVCTesting;
 

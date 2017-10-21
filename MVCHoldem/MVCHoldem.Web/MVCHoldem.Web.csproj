@@ -214,6 +214,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\AjaxOnlyAttribute.cs" />
     <Compile Include="Contracts\IHaveCustomMappings.cs" />
     <Compile Include="Contracts\IMap.cs" />
     <Compile Include="Controllers\AboutController.cs" />
@@ -234,7 +235,8 @@
     <Compile Include="ViewModels\ManageViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\Home\MostRecentPostViewModel.cs" />
-    <Compile Include="ViewModels\PostDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Post\AllPostsViewModel.cs" />
+    <Compile Include="ViewModels\Post\PostDetailsViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -267,6 +269,8 @@
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -298,6 +302,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_MostRecentPostPartial.cshtml" />
     <Content Include="Views\Post\Details.cshtml" />
+    <Content Include="Views\Post\All.cshtml" />
+    <Content Include="Views\Shared\_AllPostsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

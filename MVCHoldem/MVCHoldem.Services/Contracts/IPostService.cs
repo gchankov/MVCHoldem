@@ -9,5 +9,7 @@
         IEnumerable<Post> GetMostRecent();
 
         Post GetById(Guid id);
+
+        IEnumerable<Post> AllWithoutDeleted(string searchPattern = "");
     }
 }

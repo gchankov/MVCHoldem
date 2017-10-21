@@ -1,4 +1,4 @@
-﻿namespace MVCHoldem.Web.ViewModels
+﻿namespace MVCHoldem.Web.ViewModels.Post
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -6,13 +6,13 @@
     using MVCHoldem.Data.Models;
     using MVCHoldem.Web.Contracts;
 
-    public class PostDetailsViewModel : IMap<Post>, IHaveCustomMappings
+    public class AllPostsViewModel : IMap<Post>, IHaveCustomMappings
     {
+        public Guid Id { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }
-
-        public string Content { get; set; }
 
         public string Author { get; set; }
 
@@ -21,7 +21,7 @@
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
-            configuration.CreateMap<Post, PostDetailsViewModel>()
+            configuration.CreateMap<Post, AllPostsViewModel>()
                 .ForMember(mostRecentPostViewModel => mostRecentPostViewModel.Author, cfg => cfg.MapFrom(post => post.Author.UserName))
                 .ForMember(mostRecentPostViewModel => mostRecentPostViewModel.PostedOn, cfg => cfg.MapFrom(post => post.CreatedOn));
         }

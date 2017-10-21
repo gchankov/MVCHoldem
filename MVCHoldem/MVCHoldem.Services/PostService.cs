@@ -38,5 +38,17 @@
             return this.postsDbSet
                 .GetById(id);
         }
+
+        public IEnumerable<Post> AllWithoutDeleted(string searchTerm = "")
+        {
+            searchTerm = searchTerm.ToLower();
+
+            return this.postsDbSet.AllWithoutDeleted
+                .Where(p => p.Title.ToLower().Contains(searchTerm) ||
+                            p.Description.ToLower().Contains(searchTerm) ||
+                            p.Content.ToLower().Contains(searchTerm) ||
+                            p.Author.UserName.ToLower().Contains(searchTerm))
+                .AsEnumerable();
+        }
     }
 }

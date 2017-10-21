@@ -143,6 +143,7 @@
     <Compile Include="Services\PostServiceTests\Constructor_Should.cs" />
     <Compile Include="Services\PostServiceTests\GetById_Should.cs" />
     <Compile Include="Services\PostServiceTests\GetMostRecent_Should.cs" />
+    <Compile Include="Services\PostServiceTests\AllWithoutDeleted_Should.cs" />
     <Compile Include="Services\SignInServiceTests\Constructor_Should.cs" />
     <Compile Include="Services\SignInServiceTests\Login_Should.cs" />
     <Compile Include="Services\UserServiceTests\ChangePassword_Should.cs" />
@@ -158,8 +159,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Controllers\ManageControllerTests\ChangePassword_Should.cs" />
     <Compile Include="Web\Controllers\ManageControllerTests\Constructor_Should.cs" />
+    <Compile Include="Web\Controllers\PostControllerTests\AllPostsWithoutDeleted_Should.cs" />
+    <Compile Include="Web\Controllers\PostControllerTests\All_Should.cs" />
     <Compile Include="Web\Controllers\PostControllerTests\Constructor_Should.cs" />
     <Compile Include="Web\Controllers\PostControllerTests\Details_Should.cs" />
+    <Compile Include="Web\Controllers\PostControllerTests\FilteredPosts_Should.cs" />
     <Compile Include="Wrappers\IdentityResultWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
