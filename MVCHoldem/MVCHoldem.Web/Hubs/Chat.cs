@@ -1,9 +1,9 @@
 ﻿namespace MVCHoldem.Web.Hubs
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNet.SignalR;
-    using System.Linq;
 
     public class Chat : Hub
     {
