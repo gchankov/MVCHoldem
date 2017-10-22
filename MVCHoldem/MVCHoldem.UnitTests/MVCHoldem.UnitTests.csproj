@@ -153,6 +153,7 @@
     <Compile Include="Web\Controllers\AccountControllerTests\Constructor_Should.cs" />
     <Compile Include="Web\Controllers\AccountControllerTests\Login_Should.cs" />
     <Compile Include="Web\Controllers\AccountControllerTests\Register_Should.cs" />
+    <Compile Include="Web\Controllers\ChatControllerTests\Index_Should.cs" />
     <Compile Include="Web\Controllers\ContactControllerTests\Index_Should.cs" />
     <Compile Include="Web\Controllers\HomeControllerTests\Constructor_Should.cs" />
     <Compile Include="Web\Controllers\HomeControllerTests\Index_Should.cs" />
