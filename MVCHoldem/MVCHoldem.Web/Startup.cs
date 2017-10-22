@@ -1,6 +1,6 @@
-﻿[assembly: Microsoft.Owin.OwinStartupAttribute(typeof(MVCHoldem.Auth.Startup))]
+﻿[assembly: Microsoft.Owin.OwinStartupAttribute(typeof(MVCHoldem.Web.Startup))]
 
-namespace MVCHoldem.Auth
+namespace MVCHoldem.Web
 {
     using System;
     using Microsoft.AspNet.Identity;
@@ -17,6 +17,7 @@ namespace MVCHoldem.Auth
         public void Configuration(IAppBuilder app)
         {
             this.ConfigureAuth(app);
+            app.MapSignalR();
         }
 
         public void ConfigureAuth(IAppBuilder app)

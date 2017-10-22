@@ -2,13 +2,13 @@
 @model IEnumerable<AllPostsViewModel>
 @foreach (var post in Model)
 {
-    <div class="row">
-        <div class="col-md-10">
+    <div class="row vertical-align">
+        <div class="col-sm-10">
             <h2>@post.Title</h2>
             <p>@post.Description</p>
-            <p>Posted on: @post.PostedOn by @post.Author</p>
+            <p>Posted on: @Html.DisplayFor(p => post.PostedOn) by @post.Author</p>
         </div>
-        <div class="col-md-2">
+        <div class="col-sm-2">
             @Html.ActionLink("Read more...", "Details", "Post",
                 new { id = post.Id },
                 new { @class = "btn btn-success" })

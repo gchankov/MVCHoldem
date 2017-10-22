@@ -6,7 +6,7 @@
     using MVCHoldem.Data.Models;
     using MVCHoldem.Services;
     using MVCHoldem.Services.Contracts;
-    using MVCHoldem.Web.Attributes;
+    using MVCHoldem.Web.Infrastructure;
     using MVCHoldem.Web.Extensions;
     using MVCHoldem.Web.ViewModels.Post;
 

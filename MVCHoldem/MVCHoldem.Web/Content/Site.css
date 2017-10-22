@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#chat-messages,
+#chat-users {
+    height: 500px;
+    overflow: auto;
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
