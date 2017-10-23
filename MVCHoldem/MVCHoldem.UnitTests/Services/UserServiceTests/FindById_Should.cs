@@ -11,20 +11,24 @@
     public class FindById_Should
     {
         [Test]
-        public void ReturnUser_WhenCalledWithId()
+        public void CallUserManagerFindById_WhenCalledWithValidId()
         {
             // Arrange
+            var id = "id";
             var applicationUserManagerMock = new Mock<IApplicationUserManager>();
             var setWrapperMock = new Mock<IEfDbSetWrapper<User>>();
             applicationUserManagerMock.Setup(m => m.FindById(It.IsAny<string>()))
-                .Returns(new User());
+                .Returns(new User()
+                {
+                    Id = id
+                });
             UserService userService = new UserService(applicationUserManagerMock.Object, setWrapperMock.Object);
 
             // Act
-            var result = userService.FindById("id");
+            var result = userService.FindById(id);
 
             // Assert
-            Assert.IsInstanceOf<User>(result);
+            Assert.AreEqual(id, result.Id);
             applicationUserManagerMock.Verify(m => m.FindById(It.IsAny<string>()), Times.Once);
         }
     }

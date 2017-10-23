@@ -61,7 +61,7 @@
 
         public Post AddNewPost(string title, string description, string content, string author)
         {
-            Guard.WhenArgument(author, "postsDbSet").IsNull().Throw();
+            Guard.WhenArgument(author, "author").IsNull().Throw();
 
             var user = this.userService
                 .FindByUserName(author);
