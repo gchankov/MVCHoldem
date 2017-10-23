@@ -3,6 +3,8 @@
     using Microsoft.AspNet.Identity;
     using Moq;
     using MVCHoldem.Auth.Contracts;
+    using MVCHoldem.Data.Contracts;
+    using MVCHoldem.Data.Models;
     using MVCHoldem.Services;
     using MVCHoldem.UnitTests.Wrappers;
     using NUnit.Framework;
@@ -15,10 +17,11 @@
         {
             // Arrange
             var applicationUserManagerMock = new Mock<IApplicationUserManager>();
+            var setWrapperMock = new Mock<IEfDbSetWrapper<User>>();
             var identityResultWrapper = new IdentityResultWrapper(true);
             applicationUserManagerMock.Setup(m => m.ChangePasswordAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync(identityResultWrapper.GetIdentityResult());
-            UserService userService = new UserService(applicationUserManagerMock.Object);
+            UserService userService = new UserService(applicationUserManagerMock.Object, setWrapperMock.Object);
 
             // Act
             var result = userService.ChangePassword("id", "current password", "new password");

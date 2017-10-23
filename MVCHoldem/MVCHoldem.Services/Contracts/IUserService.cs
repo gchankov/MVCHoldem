@@ -11,5 +11,7 @@
         IdentityResult Create(string userName, string email, string password);
 
         User FindById(string userId);
+
+        User FindByUserName(string userName);
     }
 }

@@ -6,6 +6,7 @@ namespace MVCHoldem.Web.App_Start
     using System;
     using System.Data.Entity;
     using System.Web;
+    using System.Web.Mvc;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using MVCHoldem.Auth.Contracts;
@@ -16,9 +17,12 @@ namespace MVCHoldem.Web.App_Start
     using MVCHoldem.Data.SetWrappers;
     using MVCHoldem.Services;
     using MVCHoldem.Services.Contracts;
+    using MVCHoldem.Web.Infrastructure.ActionFilters;
+    using MVCHoldem.Web.Infrastructure.Attributes;
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
+    using Ninject.Web.Mvc.FilterBindingSyntax;
 
     public static class NinjectWebCommon
     {
@@ -74,8 +78,11 @@ namespace MVCHoldem.Web.App_Start
             kernel.Bind(typeof(DbContext), typeof(EfDbContext)).To<EfDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfDbSetWrapper<>)).To(typeof(EfDbSetWrapper<>));
             kernel.Bind(typeof(IEfDbContextSaveChanges)).To(typeof(EfDbContextSaveChanges));
+
             kernel.Bind<IApplicationSignInManager>().ToMethod(_ => HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>());
             kernel.Bind<IApplicationUserManager>().ToMethod(_ => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
+
+            kernel.BindFilter<SaveChangesFilter>(FilterScope.Controller, 0).WhenActionMethodHas<SaveChangesAttribute>();
         }        
     }
 }

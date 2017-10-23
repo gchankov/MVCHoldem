@@ -61,6 +61,12 @@
             entry.State = EntityState.Modified;
         }
 
+        public void HardDelete(T entity)
+        {
+            var entry = this.context.Entry(entity);
+            entry.State = EntityState.Deleted;
+        }
+
         public void Update(T entity)
         {
             DbEntityEntry entry = this.context.Entry(entity);

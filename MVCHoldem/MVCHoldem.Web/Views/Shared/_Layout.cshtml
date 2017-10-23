@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - MVC Hold'em</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/kendo-css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,10 +20,34 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("All Posts", "All", "Post")</li>
-                    <li>@Html.ActionLink("About", "Index", "About")</li>
-                    <li>@Html.ActionLink("Contact", "Index", "Contact")</li>
+                    <li>
+                        @Html.ActionLink("Home",
+                            "Index",
+                            "Home",
+                            routeValues: new { area = string.Empty },
+                            htmlAttributes: null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("All Posts",
+                            "All",
+                            "Post",
+                            routeValues: new { area = string.Empty },
+                            htmlAttributes: null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("About",
+                            "Index",
+                            "About",
+                            routeValues: new { area = string.Empty },
+                            htmlAttributes: null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("Contact",
+                            "Index",
+                            "Contact",
+                            routeValues: new { area = string.Empty },
+                            htmlAttributes: null)
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -36,8 +60,8 @@
             <p>&copy; @DateTime.Now.Year - MVC Hold'em</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

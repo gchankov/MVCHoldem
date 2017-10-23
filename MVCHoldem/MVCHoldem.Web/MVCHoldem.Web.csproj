@@ -55,6 +55,10 @@
     <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
       <HintPath>..\packages\Bytes2you.Validation.2.0.0.0\lib\portable-win+net40+sl40+wp+Xbox40\Bytes2you.Validation.dll</HintPath>
     </Reference>
+    <Reference Include="Kendo.Mvc, Version=2017.3.1018.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Kendo.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -220,8 +224,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\PostAdminController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\PostGridViewModel.cs" />
     <Compile Include="Controllers\ChatController.cs" />
-    <Compile Include="Infrastructure\AjaxOnlyAttribute.cs" />
+    <Compile Include="Infrastructure\ActionFilters\SaveChangesFilter.cs" />
+    <Compile Include="Infrastructure\Attributes\AjaxOnlyAttribute.cs" />
     <Compile Include="Contracts\IHaveCustomMappings.cs" />
     <Compile Include="Contracts\IMap.cs" />
     <Compile Include="Controllers\AboutController.cs" />
@@ -236,6 +244,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\Chat.cs" />
+    <Compile Include="Infrastructure\Attributes\SaveChangesAttribute.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
@@ -254,6 +263,25 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Kendo\fonts\DejaVu\LICENSE.txt" />
+    <Content Include="Content\Kendo\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Content\Kendo\fonts\glyphs\WebComponentsIcons.svg" />
+    <Content Include="Content\Kendo\kendo.common.min.css" />
+    <Content Include="Content\Kendo\kendo.metroblack.min.css" />
+    <Content Include="Content\Kendo\MetroBlack\editor.png" />
+    <Content Include="Content\Kendo\MetroBlack\imagebrowser.png" />
+    <Content Include="Content\Kendo\MetroBlack\indeterminate.gif" />
+    <Content Include="Content\Kendo\MetroBlack\loading-image.gif" />
+    <Content Include="Content\Kendo\MetroBlack\loading.gif" />
+    <Content Include="Content\Kendo\MetroBlack\loading_2x.gif" />
+    <Content Include="Content\Kendo\MetroBlack\markers.png" />
+    <Content Include="Content\Kendo\MetroBlack\markers_2x.png" />
+    <Content Include="Content\Kendo\MetroBlack\slider-h.gif" />
+    <Content Include="Content\Kendo\MetroBlack\slider-v.gif" />
+    <Content Include="Content\Kendo\MetroBlack\sprite.png" />
+    <Content Include="Content\Kendo\MetroBlack\sprite_2x.png" />
+    <Content Include="Content\Kendo\MetroBlack\sprite_kpi.png" />
+    <Content Include="Content\Kendo\MetroBlack\sprite_kpi_2x.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -269,8 +297,34 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Kendo\kendo.metroblack.min.css.map" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSans.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <Content Include="Content\Kendo\fonts\DejaVu\DejaVuSerif.ttf" />
+    <Content Include="Content\Kendo\fonts\glyphs\KendoUIGlyphs.eot" />
+    <Content Include="Content\Kendo\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <Content Include="Content\Kendo\fonts\glyphs\KendoUIGlyphs.woff" />
+    <Content Include="Content\Kendo\fonts\glyphs\WebComponentsIcons.eot" />
+    <Content Include="Content\Kendo\fonts\glyphs\WebComponentsIcons.ttf" />
+    <Content Include="Content\Kendo\fonts\glyphs\WebComponentsIcons.woff" />
+    <Content Include="Content\Kendo\kendo.common.min.css.map" />
+    <Content Include="Areas\Admin\Views\PostAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Properties\PublishProfiles\Production.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Libraries\Kendo.Mvc.dll" />
+    <Content Include="Libraries\Kendo.Mvc.xml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -286,6 +340,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Kendo\kendo.aspnetmvc.min.js" />
+    <Content Include="Scripts\Kendo\kendo.web.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -316,9 +372,12 @@
     <Content Include="Views\Post\All.cshtml" />
     <Content Include="Views\Shared\_AllPostsPartial.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Scripts\Kendo\kendo.web.min.js.map" />
+    <Content Include="Scripts\Kendo\kendo.aspnetmvc.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

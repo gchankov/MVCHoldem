@@ -1,4 +1,4 @@
-﻿namespace MVCHoldem.Web.Infrastructure
+﻿namespace MVCHoldem.Web.Infrastructure.Attributes
 {
     using System.Reflection;
     using System.Web.Mvc;

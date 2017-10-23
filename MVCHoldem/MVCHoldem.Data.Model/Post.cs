@@ -2,31 +2,26 @@
 {
     using System.ComponentModel.DataAnnotations;
     using MVCHoldem.Data.Models.Abstracts;
+    using MVCHoldem.Data.Models.Common;
 
     public class Post : DataModel
     {
-        private const int PostTitleMinLength = 5;
-        private const int PostTitleMaxLength = 50;
-        private const string PostTitleErrorMessage = "Incorrect post title!";
-
-        private const int PostDesctiptionMinLength = 5;
-        private const int PostDescriptionMaxLength = 100;
-        private const string PostDescriptionErrorMessage = "Incorrect post description!";
-
-        private const int PostContentMinLength = 100;
-        private const int PostContentMaxLength = 30000;
-        private const string PostContentErrorMessage = "Incorrect post content!";
-
         [Required]
-        [StringLength(PostTitleMaxLength, MinimumLength = PostTitleMinLength, ErrorMessage = PostTitleErrorMessage)]
+        [StringLength(Constants.PostTitleMaxLength,
+            MinimumLength = Constants.PostTitleMinLength,
+            ErrorMessage = Constants.PostTitleErrorMessage)]
         public string Title { get; set; }
 
         [Required]
-        [StringLength(PostDescriptionMaxLength, MinimumLength = PostDesctiptionMinLength, ErrorMessage = PostDescriptionErrorMessage)]
+        [StringLength(Constants.PostDescriptionMaxLength,
+            MinimumLength = Constants.PostDesctiptionMinLength,
+            ErrorMessage = Constants.PostDescriptionErrorMessage)]
         public string Description { get; set; }
 
         [Required]
-        [StringLength(PostContentMaxLength, MinimumLength = PostContentMinLength, ErrorMessage = PostContentErrorMessage)]
+        [StringLength(Constants.PostContentMaxLength,
+            MinimumLength = Constants.PostContentMinLength,
+            ErrorMessage = Constants.PostContentErrorMessage)]
         public string Content { get; set; }
 
         public virtual User Author { get; set; }

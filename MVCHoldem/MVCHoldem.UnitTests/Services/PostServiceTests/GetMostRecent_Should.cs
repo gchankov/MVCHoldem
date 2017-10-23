@@ -6,6 +6,7 @@
     using MVCHoldem.Data.Contracts;
     using MVCHoldem.Data.Models;
     using MVCHoldem.Services;
+    using MVCHoldem.Services.Contracts;
     using NUnit.Framework;
 
     [TestFixture]
@@ -19,8 +20,8 @@
             var setWrapperMock = new Mock<IEfDbSetWrapper<Post>>();
             setWrapperMock.Setup(m => m.AllWithoutDeleted)
                 .Returns(postsQueryable);
-            var contextSaveChanges = new Mock<IEfDbContextSaveChanges>();
-            PostService postService = new PostService(setWrapperMock.Object, contextSaveChanges.Object);
+            var userServiceMock = new Mock<IUserService>();
+            PostService postService = new PostService(setWrapperMock.Object, userServiceMock.Object);
 
             // Act
             var result = postService.GetMostRecent();

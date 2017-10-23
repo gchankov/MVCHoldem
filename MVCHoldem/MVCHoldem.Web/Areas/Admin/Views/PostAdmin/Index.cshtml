@@ -1,0 +1,63 @@
+﻿<h3>Posts Grid</h3>
+@(Html.Kendo().Grid<PostGridViewModel>()
+    .Name("Post")
+    .ToolBar(toolBar => toolBar.Create())
+    .Columns(columns =>
+    {
+        columns.Bound(m => m.Id);
+        columns.Bound(m => m.Title);
+        columns.Bound(m => m.Description);
+        columns.Bound(m => m.Content);
+        columns.Bound(m => m.Author);
+        columns.Bound(m => m.CreatedOn);
+        columns.Bound(m => m.ModifiedOn);
+        columns.Bound(m => m.DeletedOn);
+        columns.Bound(m => m.IsDeleted);
+
+        columns.Command(command => { command.Edit(); command.Destroy(); });
+    })
+    .Editable(editable =>
+    {
+        editable.Mode(GridEditMode.PopUp);
+    })
+    .Pageable(c =>
+    {
+        c.Refresh(true);
+        c.PageSizes(true);
+    })
+    .Sortable()
+    .DataSource(source =>
+    {
+        source.Ajax()
+        .Model(m =>
+        {
+            m.Id(c => c.Id);
+            m.Field(model => model.Id).Editable(false);
+            m.Field(model => model.Author).Editable(false);
+            m.Field(model => model.CreatedOn).Editable(false);
+            m.Field(model => model.ModifiedOn).Editable(false);
+            m.Field(model => model.DeletedOn).Editable(false);
+        })
+        .Create(c => c.Action<PostAdminController>(a => a.CreatePost(null)))
+        .Read(c => c.Action<PostAdminController>(a => a.ReadPosts(null))).PageSize(5)
+        .Update(c => c.Action<PostAdminController>(a => a.UpdatePost(null)))
+        .Destroy(c => c.Action<PostAdminController>(a => a.HardDeletePost(null)));
+    })
+    .Filterable(f => f.Mode(GridFilterMode.Menu))
+    .Deferred()
+    .Events(e => e.Edit("onEdit")))
+
+@section Scripts {
+    @Scripts.Render("~/bundles/kendo")
+    @Html.Kendo().DeferredScripts()
+    <script>
+        const onEdit = (e) => {
+            $('[name="Id"]').attr("readonly", true);
+            $('[name="Author"]').attr("readonly", true);
+            $('[name="CreatedOn"]').attr("readonly", true);
+            $('[name="ModifiedOn"]').attr("readonly", true);
+            $('[name="DeletedOn"]').attr("readonly", true);
+            $('.editor-field').css("color", "black");
+        }
+    </script>
+}

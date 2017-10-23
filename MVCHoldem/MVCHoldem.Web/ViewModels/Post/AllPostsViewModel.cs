@@ -22,8 +22,8 @@
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Post, AllPostsViewModel>()
-                .ForMember(mostRecentPostViewModel => mostRecentPostViewModel.Author, cfg => cfg.MapFrom(post => post.Author.UserName))
-                .ForMember(mostRecentPostViewModel => mostRecentPostViewModel.PostedOn, cfg => cfg.MapFrom(post => post.CreatedOn));
+                .ForMember(allPostsViewModel => allPostsViewModel.Author, cfg => cfg.MapFrom(post => post.Author.UserName))
+                .ForMember(allPostsViewModel => allPostsViewModel.PostedOn, cfg => cfg.MapFrom(post => post.CreatedOn));
         }
     }
 }

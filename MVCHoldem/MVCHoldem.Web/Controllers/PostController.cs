@@ -7,7 +7,7 @@
     using MVCHoldem.Services;
     using MVCHoldem.Services.Contracts;
     using MVCHoldem.Web.Extensions;
-    using MVCHoldem.Web.Infrastructure;
+    using MVCHoldem.Web.Infrastructure.Attributes;
     using MVCHoldem.Web.ViewModels.Post;
 
     public class PostController : Controller
