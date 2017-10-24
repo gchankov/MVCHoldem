@@ -1,6 +1,10 @@
 ﻿namespace MVCHoldem.UnitTests.Web.Areas.Admin.Controllers.PostControllerTests
 {
     using System;
+    using System.Web;
+    using System.Web.Caching;
+    using System.Web.Mvc;
+    using System.Web.Routing;
     using Moq;
     using MVCHoldem.Data.Models;
     using MVCHoldem.Services.Contracts;
@@ -21,7 +25,11 @@
                 .Returns(new Post());
             postsServiceMock
                 .Setup(m => m.HardDelete(It.IsAny<Post>()));
+            var context = new Mock<HttpContextBase>();
+            context.Setup(c => c.Cache)
+                .Returns(new Cache());
             PostAdminController postAdminController = new PostAdminController(postsServiceMock.Object);
+            postAdminController.ControllerContext = new ControllerContext(context.Object, new RouteData(), postAdminController);
             var postDetailsViewModel = new PostGridViewModel()
             {
                 Id = "00000000-0000-0000-0000-000000000000"
@@ -45,7 +53,11 @@
                 .Returns(new Post());
             postsServiceMock
                 .Setup(m => m.HardDelete(It.IsAny<Post>()));
+            var context = new Mock<HttpContextBase>();
+            context.Setup(c => c.Cache)
+                .Returns(new Cache());
             PostAdminController postAdminController = new PostAdminController(postsServiceMock.Object);
+            postAdminController.ControllerContext = new ControllerContext(context.Object, new RouteData(), postAdminController);
 
             // Act
             postAdminController.HardDeletePost(null);
@@ -65,7 +77,11 @@
                 .Returns(new Post());
             postsServiceMock
                 .Setup(m => m.HardDelete(It.IsAny<Post>()));
+            var context = new Mock<HttpContextBase>();
+            context.Setup(c => c.Cache)
+                .Returns(new Cache());
             PostAdminController postAdminController = new PostAdminController(postsServiceMock.Object);
+            postAdminController.ControllerContext = new ControllerContext(context.Object, new RouteData(), postAdminController);
             var postDetailsViewModel = new PostGridViewModel()
             {
                 Id = "00000000-0000-0000-0000-000000000000"

@@ -97,6 +97,8 @@
                 this.postService.HardDelete(post);
             }
 
+            this.HttpContext.Cache.Remove("mostRecentPosts");
+
             return this.Json(new[] { postGridViewModel });
         }
     }

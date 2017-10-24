@@ -1,5 +1,7 @@
 ﻿namespace MVCHoldem.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Bytes2you.Validation;
@@ -22,16 +24,26 @@
         [HttpGet]
         public ActionResult Index()
         {
-            var mostRecentPosts = this.postService
-                .GetMostRecent()
-                .Map<Post, MostRecentPostViewModel>()
-                .ToList();
+            if (this.HttpContext.Cache["mostRecentPosts"] == null)
+            {
+                var mostRecentPosts = this.postService
+                    .GetMostRecent()
+                    .Map<Post, MostRecentPostViewModel>()
+                    .ToList();
 
-            Guard.WhenArgument(mostRecentPosts, "mostRecentPosts").IsNull().Throw();
+                Guard.WhenArgument(mostRecentPosts, "mostRecentPosts").IsNull().Throw();
+
+                this.HttpContext.Cache.Insert(
+                    "mostRecentPosts",
+                    mostRecentPosts,
+                    null,
+                    DateTime.Now.AddMinutes(30D),
+                    TimeSpan.Zero);
+            }
 
             var homeViewModel = new HomeViewModel()
             {
-                MostRecentPosts = mostRecentPosts
+                MostRecentPosts = (List<MostRecentPostViewModel>)this.HttpContext.Cache["mostRecentPosts"]
             };
 
             return this.View(homeViewModel);
